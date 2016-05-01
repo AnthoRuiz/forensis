@@ -1,0 +1,23 @@
+
+#Utilidades
+GET        /fecha                                                   @co.com.forensis.backend.commons.controller.CommonsController.getFecha
+
+
+
+#### Usuarios ####
+
+#Usuarios
+GET       /usuarios                       @co.com.forensis.backend.usuario.controller.UsuarioController.getUsuario
+POST      /usuarios                       @co.com.forensis.backend.usuario.controller.UsuarioController.createUsuario
+PUT       /usuarios                       @co.com.forensis.backend.usuario.controller.UsuarioController.updateUsuario
+DELETE    /usuarios/:id                   @co.com.forensis.backend.usuario.controller.UsuarioController.deleteUsuario( id: Int )
+
+
+#### Leyes ####
+
+#Usuarios
+
+GET       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.getLey
+POST      /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.createLey
+PUT       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.updateLey
+DELETE    /leyes/:id                   @co.com.forensis.backend.leyes.controller.LeyController.deleteLey( id: Int )
