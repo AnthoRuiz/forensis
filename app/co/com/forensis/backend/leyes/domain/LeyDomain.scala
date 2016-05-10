@@ -3,7 +3,7 @@ package co.com.forensis.backend.leyes.domain
 /**
  * Created by jarvis on 01/05/2016.
  */
-final case class Ley( id: Int, titulo: String, capitulo: String, articulo: String )
+final case class LeyDomain( id: Int, titulo: String )
 
 trait LeyDomainOperation
 

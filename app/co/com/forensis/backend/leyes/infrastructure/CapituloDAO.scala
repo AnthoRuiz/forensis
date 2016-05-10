@@ -1,9 +1,5 @@
 package co.com.forensis.backend.leyes.infrastructure
 
-/**
- * Created by Usuario on 10/05/2016.
- */
-
 import com.google.inject.Inject
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import play.db.NamedDatabase

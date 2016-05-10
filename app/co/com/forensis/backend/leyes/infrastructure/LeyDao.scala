@@ -7,9 +7,6 @@ import slick.driver.JdbcProfile
 
 import scala.concurrent.Future
 
-/**
- * Created by jarvis on 01/05/2016.
- */
 final class LeyDAO @Inject() ( @NamedDatabase( "default" ) protected val dbConfigProvider:DatabaseConfigProvider )
     extends HasDatabaseConfigProvider[ JdbcProfile ] {
 

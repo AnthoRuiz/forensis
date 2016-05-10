@@ -1,8 +1,5 @@
 package co.com.forensis.backend.leyes.infrastructure
 
-/**
- * Created by Usuario on 10/05/2016.
- */
 import slick.driver.PostgresDriver.api._
 import slick.lifted.{ ProvenShape, Tag }
 

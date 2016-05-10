@@ -3,10 +3,6 @@ package co.com.forensis.backend.leyes.infrastructure
 import slick.driver.PostgresDriver.api._
 import slick.lifted.{ ProvenShape, Tag }
 
-/**
- * Created by jarvis on 01/05/2016.
- */
-
 final case class ArticuloRecord( id: Option[ Int ], cuerpo: String, leyId: Int, capituloId: Int )
 
 final class ArticuloTable( tag: Tag ) extends Table[ ArticuloRecord ]( tag, "articulos" ) {
