@@ -40,7 +40,7 @@ final class UsuarioDAO @Inject() ( @NamedDatabase( "default" ) protected val dbC
   }
 
   def authenticateUsuario( user: AuthenticateUsuarioRequest ): Future[ Option[ UsuarioRecord ] ] = {
-    val autentica = usuarios.filter( x => x.correo === user.correo && x.clave === user.clave )
+    val autentica = usuarios.filter( x => x.correo === user.correo && x.clave === user.clave && x.activo === true )
     db.run( autentica.result.headOption )
   }
 }

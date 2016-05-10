@@ -5,9 +5,8 @@ import org.joda.time.DateTime
 /**
  * Created by Usuario on 27/04/2016.
  */
-final case class Usuario( id: Int, nombre: String, documento: String,
-                          sexo: String, fechaNac: DateTime, edad: Int, direccionDom: String, correo: String,
-                          telefono: String, celular: String, userInsert: String, modificacion: DateTime, gcmid: String, rol: String, clave: String )
+final case class Usuario( id: Int, nombre: String, apellido: String, cedula: String,
+                          correo: String, celular: String, clave: String, activo: Boolean )
 
 trait UsuarioDomainOperation
 

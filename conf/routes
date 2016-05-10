@@ -15,8 +15,8 @@ DELETE    /usuarios/:id                   @co.com.forensis.backend.usuario.contr
 
 #### Leyes ####
 
-#Usuarios
-
+#Obtener Articulo dado un Capitulo y una Ley
+POST       /articulos                   @co.com.forensis.backend.leyes.controller.ArticuloController.getArticulosByIds
 #GET       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.getLey
 #POST      /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.createLey
 #PUT       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.updateLey

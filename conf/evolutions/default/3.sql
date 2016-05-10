@@ -1,10 +1,10 @@
 # --- !Ups
 
-CREATE TABLE "leyes" (
+CREATE TABLE "capitulos" (
   "id" SERIAL NOT NULL PRIMARY KEY,
   "nombre" VARCHAR NOT NULL
   );
 
 # --- !Downs
 
-drop table "leyes";
+drop table "capitulos";

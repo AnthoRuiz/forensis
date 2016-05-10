@@ -1,22 +1,23 @@
 # --- !Ups
 
-CREATE TABLE "LEYES" (
-  "ID" SERIAL NOT NULL PRIMARY KEY,
-  "TITULO" VARCHAR NOT NULL,
-  "CAPITULO" VARCHAR NOT NULL,
-  "ARTICULO" VARCHAR NOT NULL
-);
+CREATE TABLE "usuarios" (
+  "id" SERIAL NOT NULL PRIMARY KEY,
+  "nombre" VARCHAR NOT NULL,
+  "apellido" VARCHAR NOT NULL,
+  "cedula" VARCHAR UNIQUE NOT NULL,
+  "correo" VARCHAR NOT NULL,
+  "celular" VARCHAR NOT NULL,
+  "clave" VARCHAR NOT NULL,
+  "activo" BOOLEAN NULL
+  );
 
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
-INSERT INTO "LEYES"("TITULO","CAPITULO","ARTICULO") VALUES ('TITULO  DE LA LEY','CAPITULO DE LA LEY','Lorem ipsum dolor sit amet, sed nibh tempus et tellus ut, in purus, purus mollis, ante nisl. Risus erat litora ornare lobortis curabitur velit, faucibus imperdiet sollicitudin a eros lectus nostra, magnis ante fusce est pede.');
+  INSERT INTO "usuarios" VALUES (1,'ANTHONY', 'RUIZ', '19525295', 'ANTHONY@EJEMPLO.COM', '04141431444', 'PASSWORD', FALSE);
+
+  INSERT INTO "usuarios" VALUES (2,'CARLOS', 'PEREZ', '23234234', 'CARLOS@EJEMPLO.COM', '898374923423', 'CLAVE', TRUE);
+
+  INSERT INTO "usuarios" VALUES (3,'RICHARD', 'GONZALES', '53534534', 'RICHARD@EJEMPLO.COM', '576567567567', 'ULTIMACLAVE', FALSE);
+
 
 # --- !Downs
 
-DROP TABLE "LEYES";
+drop table "usuarios";

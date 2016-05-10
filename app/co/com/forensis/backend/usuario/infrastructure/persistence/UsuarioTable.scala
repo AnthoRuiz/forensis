@@ -9,41 +9,26 @@ import com.github.tototoshi.slick.PostgresJodaSupport._
  * Created by Usuario on 27/04/2016.
  */
 
-final case class UsuarioRecord( id: Option[ Int ], nombre: String, documento: String,
-                                sexo: String, fechaNac: DateTime, edad: Int, direccionDom: String, correo: String,
-                                telefono: String, celular: String, userInsert: String, modificacion: DateTime, gcmid: String, rol: String, clave: String )
+final case class UsuarioRecord( id: Option[ Int ], nombre: String, apellido: String, cedula: String,
+                                correo: String, celular: String, clave: String, activo: Boolean )
 
-final class UsuarioTable( tag: Tag ) extends Table[ UsuarioRecord ]( tag, "USUARIO" ) {
+final class UsuarioTable( tag: Tag ) extends Table[ UsuarioRecord ]( tag, "usuarios" ) {
 
-  def id = column[ Option[ Int ] ]( "ID", O.PrimaryKey, O.AutoInc )
+  def id = column[ Option[ Int ] ]( "id", O.PrimaryKey, O.AutoInc )
 
-  def nombre = column[ String ]( "NOMBRE" )
+  def nombre = column[ String ]( "nombre" )
 
-  def documento = column[ String ]( "DOCUMENTO" )
+  def apellido = column[ String ]( "apellido" )
 
-  def sexo = column[ String ]( "SEXO" )
+  def cedula = column[ String ]( "cedula" )
 
-  def fechaNac = column[ DateTime ]( "FECHANAC" )
+  def correo = column[ String ]( "correo" )
 
-  def edad = column[ Int ]( "EDAD" )
+  def celular = column[ String ]( "celular" )
 
-  def direccionDom = column[ String ]( "DIRECCIONDOM" )
+  def clave = column[ String ]( "clave" )
 
-  def correo = column[ String ]( "CORREO" )
+  def activo = column[ Boolean ]( "activo" )
 
-  def telefono = column[ String ]( "TELEFONO" )
-
-  def celular = column[ String ]( "CELULAR" )
-
-  def userInsert = column[ String ]( "USERINSERT" )
-
-  def modificacion = column[ DateTime ]( "MODIFICACION" )
-
-  def gcmid = column[ String ]( "GCMID" )
-
-  def rol = column[ String ]( "ROL" )
-
-  def clave = column[ String ]( "CLAVE" )
-
-  override def * : ProvenShape[ UsuarioRecord ] = ( id, nombre, documento, sexo, fechaNac, edad, direccionDom, correo, telefono, celular, userInsert, modificacion, gcmid, rol, clave ) <> ( UsuarioRecord.tupled, UsuarioRecord.unapply )
+  override def * : ProvenShape[ UsuarioRecord ] = ( id, nombre, apellido, cedula, correo, celular, clave, activo ) <> ( UsuarioRecord.tupled, UsuarioRecord.unapply )
 }

@@ -2,7 +2,7 @@ package co.com.forensis.backend.usuario.controller
 
 import co.com.forensis.backend.commons.service.{ OperationError, OperationFailed }
 import co.com.forensis.backend.usuario.controller.request.{ AuthenticateUsuarioRequest, CreateUsuarioRequest, UpdateUsuarioRequest, UsuarioDeserializer }
-import co.com.forensis.backend.usuario.controller.response.{ UsuarioAutenticadoResponse, UsuarioResponse, UsuarioResponseFactory }
+import co.com.forensis.backend.usuario.controller.response.{ UsuarioResponse, UsuarioResponseFactory }
 import co.com.forensis.backend.usuario.service.UsuarioService
 import com.google.inject.{ Inject, Singleton }
 import play.api.Logger
@@ -37,10 +37,6 @@ final class UsuarioController @Inject() ( service: UsuarioService ) extends Cont
           )
         }
     )
-
-    //Simulando la autenticacion de un usuario
-    //Future.successful( UsuarioResponseFactory.createUnauthorized()); //no autenticado
-    //Future.successful( UsuarioResponseFactory.createOk( UsuarioAutenticadoResponse( "carlosreyes", "INSPECTOR" ) ) ); //autenticado
   }
 
   def updateUsuario = Action.async( parse.json ) { implicit request =>
@@ -77,9 +73,8 @@ final class UsuarioController @Inject() ( service: UsuarioService ) extends Cont
             case OperationError( _ )  => UsuarioResponseFactory.createInternalServerError( "un error inesperado ocurrio mientras se procesaba la solicitud" )
           }
         },
-        clases => UsuarioResponseFactory.createOk( clases.map( user => UsuarioResponse( user.id, user.nombre,
-          user.documento, user.sexo, user.fechaNac, user.edad, user.direccionDom, user.correo, user.telefono,
-          user.celular, user.userInsert, user.modificacion, user.gcmid, user.rol ) ) )
+        users => UsuarioResponseFactory.createOk( users.map( user => UsuarioResponse( user.id, user.nombre,
+          user.apellido, user.cedula, user.correo, user.celular, user.clave, user.activo ) ) )
       )
     }
   }

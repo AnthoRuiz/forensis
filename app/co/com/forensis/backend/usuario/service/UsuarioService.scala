@@ -4,27 +4,27 @@ package co.com.forensis.backend.usuario.service
  * Created by Usuario on 27/04/2016.
  */
 
-import co.com.forensis.backend.commons.service.{ DomainOperation, OperationError, OperationFailed }
-import co.com.forensis.backend.usuario.infrastructure.persistence.{ UsuarioRecord, UsuarioRepository }
+import co.com.forensis.backend.commons.service.{ OperationError, OperationFailed }
 import co.com.forensis.backend.usuario.controller.request.{ AuthenticateUsuarioRequest, CreateUsuarioRequest, UpdateUsuarioRequest }
 import co.com.forensis.backend.usuario.controller.response.UsuarioAutenticadoResponse
+import co.com.forensis.backend.usuario.infrastructure.persistence.{ UsuarioDAO, UsuarioRecord }
 import co.com.forensis.backend.usuario.service.domain._
 import com.google.inject.{ Inject, Singleton }
 import play.api.Logger
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 @Singleton
-final class UsuarioService @Inject() ( repository: UsuarioRepository ) {
+final class UsuarioService @Inject() ( dao: UsuarioDAO ) {
 
   import co.com.forensis.backend.commons.service.DomainOperation
 
   def getUsuario: Future[ Either[ DomainOperation, List[ Usuario ] ] ] = {
-    repository.getUsuario.map { clases =>
+    dao.getUsuario.map { clases =>
       Right(
-        clases.map( user => Usuario( user.id.get, user.nombre, user.documento, user.sexo, user.fechaNac, user.edad, user.direccionDom,
-        user.correo, user.telefono, user.celular, user.userInsert, user.modificacion, user.gcmid, user.rol, user.clave ) ).toList
+        clases.map( user => Usuario( user.id.get, user.nombre,
+        user.apellido, user.cedula, user.correo, user.celular, user.clave, user.activo ) ).toList
       )
     }.recover {
       case e =>
@@ -33,11 +33,9 @@ final class UsuarioService @Inject() ( repository: UsuarioRepository ) {
     }
   }
 
-  def createUsuario( createUsuarioRequest: CreateUsuarioRequest ): Future[ Either[ DomainOperation, UsuarioDomainOperation ] ] = {
-    repository.insertUsuario( Usuario( 0, createUsuarioRequest.nombre, createUsuarioRequest.documento, createUsuarioRequest.sexo,
-      createUsuarioRequest.fechaNac, createUsuarioRequest.edad, createUsuarioRequest.direccionDom, createUsuarioRequest.correo,
-      createUsuarioRequest.telefono, createUsuarioRequest.celular, createUsuarioRequest.userInsert,
-      createUsuarioRequest.modificacion, createUsuarioRequest.gcmid, createUsuarioRequest.rol, createUsuarioRequest.clave ) ).map { filasAfectadas =>
+  def createUsuario( user: CreateUsuarioRequest ): Future[ Either[ DomainOperation, UsuarioDomainOperation ] ] = {
+    dao.insertUsuario( UsuarioRecord( None, user.nombre, user.apellido, user.cedula,
+      user.correo, user.celular, user.clave, user.activo ) ).map { filasAfectadas =>
       filasAfectadas match {
         case 1 => Right( UsuarioCreated( "created" ) )
         case _ => Left( OperationFailed( "failed" ) )
@@ -49,12 +47,9 @@ final class UsuarioService @Inject() ( repository: UsuarioRepository ) {
     }
   }
 
-  def updateUsuario( updateUsuario: UpdateUsuarioRequest ): Future[ Either[ DomainOperation, UsuarioUpdated ] ] = {
-    repository.updateUsuario( Usuario(
-      updateUsuario.id, updateUsuario.nombre, updateUsuario.documento, updateUsuario.sexo, updateUsuario.fechaNac,
-      updateUsuario.edad, updateUsuario.direccionDom, updateUsuario.correo, updateUsuario.telefono, updateUsuario.celular,
-      updateUsuario.userInsert, updateUsuario.modificacion, updateUsuario.gcmid, updateUsuario.rol, updateUsuario.clave
-    ) ).map { result =>
+  def updateUsuario( user: UpdateUsuarioRequest ): Future[ Either[ DomainOperation, UsuarioUpdated ] ] = {
+    dao.updateUsuario( UsuarioRecord( Some( user.id ), user.nombre, user.apellido, user.cedula,
+      user.correo, user.celular, user.clave, user.activo ) ).map { result =>
       result match {
         case 1 => Right( UsuarioUpdated( "updated" ) )
         case _ => Left( OperationFailed( "failed" ) )
@@ -67,7 +62,7 @@ final class UsuarioService @Inject() ( repository: UsuarioRepository ) {
   }
 
   def deleteUsuario( id: Int ): Future[ Either[ DomainOperation, UsuarioDeleted ] ] = {
-    repository.deleteUsuario( id ).map { result =>
+    dao.deleteUsuario( id ).map { result =>
       result match {
         case 1 => Right( UsuarioDeleted( "deleted" ) )
         case _ => Left( OperationFailed( "failed" ) )
@@ -80,9 +75,9 @@ final class UsuarioService @Inject() ( repository: UsuarioRepository ) {
   }
 
   def authenticateUsuario( user: AuthenticateUsuarioRequest ): Future[ Either[ DomainOperation, UsuarioAutenticadoResponse ] ] = {
-    repository.authenticatedUsuario( user ).map { ( result: Option[ UsuarioRecord ] ) =>
+    dao.authenticateUsuario( user ).map { ( result: Option[ UsuarioRecord ] ) =>
       result match {
-        case Some( usuario ) => Right( UsuarioAutenticadoResponse( usuario.nombre, usuario.rol ) )
+        case Some( usuario ) => Right( UsuarioAutenticadoResponse( usuario.nombre, usuario.apellido, usuario.correo ) )
         case None            => Left( OperationFailed( "Usuario no existe" ) )
       }
     }
