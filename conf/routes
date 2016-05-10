@@ -17,7 +17,7 @@ DELETE    /usuarios/:id                   @co.com.forensis.backend.usuario.contr
 
 #Usuarios
 
-GET       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.getLey
-POST      /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.createLey
-PUT       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.updateLey
-DELETE    /leyes/:id                   @co.com.forensis.backend.leyes.controller.LeyController.deleteLey( id: Int )
+#GET       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.getLey
+#POST      /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.createLey
+#PUT       /leyes                       @co.com.forensis.backend.leyes.controller.LeyController.updateLey
+#DELETE    /leyes/:id                   @co.com.forensis.backend.leyes.controller.LeyController.deleteLey( id: Int )

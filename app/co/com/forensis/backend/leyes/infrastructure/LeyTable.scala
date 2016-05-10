@@ -7,18 +7,14 @@ import slick.lifted.{ ProvenShape, Tag }
  * Created by jarvis on 01/05/2016.
  */
 
-final case class LeyRecord( id: Option[ Int ], titulo: String, capitulo: String, articulo: String )
+final case class LeyRecord( id: Option[ Int ], nombre: String )
 
-final class LeyTable( tag: Tag ) extends Table[ LeyRecord ]( tag, "LEYES" ) {
+final class LeyTable( tag: Tag ) extends Table[ LeyRecord ]( tag, "leyes" ) {
 
-  def id = column[ Option[ Int ] ]( "ID", O.PrimaryKey, O.AutoInc )
+  def id = column[ Option[ Int ] ]( "id", O.PrimaryKey, O.AutoInc )
 
-  def titulo = column[ String ]( "TITULO" )
+  def nombre = column[ String ]( "nombre" )
 
-  def capitulo = column[ String ]( "CAPITULO" )
-
-  def articulo = column[ String ]( "ARTICULO" )
-
-  override def * : ProvenShape[ LeyRecord ] = ( id, titulo, capitulo, articulo ) <> ( LeyRecord.tupled, LeyRecord.unapply )
+  override def * : ProvenShape[ LeyRecord ] = ( id, nombre ) <> ( LeyRecord.tupled, LeyRecord.unapply )
 }
 

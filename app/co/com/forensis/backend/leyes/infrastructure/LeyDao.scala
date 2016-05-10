@@ -22,8 +22,8 @@ final class LeyDAO @Inject() ( @NamedDatabase( "default" ) protected val dbConfi
     db.run( query.result )
   }
 
-  def insertLey( ley: LeyRecord ): Future[ Int ] = {
-    val insert = leyes += ley
+  def insertLey( ley: LeyRecord ): Future[ Option[ Int ] ] = {
+    val insert = leyes returning leyes.map( _.id ) += ley
     db.run( insert )
   }
 
